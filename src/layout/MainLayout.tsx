@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import AppRoutes from "../routes/AppRoutes";
-import Loader from "../components/Loader";
+import Loader from "../components/loader";
 
 const MainLayout = () => {
   const [loading, setLoading] = useState(true);

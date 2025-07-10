@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const randomParticles = () =>
   Array.from({ length: 12 }).map((_, i) => {
@@ -31,8 +32,13 @@ const Loader: React.FC = () => {
         {randomParticles()}
       </div>
 
-      {/* Main loading container with matching gradient background */}
-      <div className="relative flex flex-col items-center px-10 py-12 ">
+      {/* Main loading container with framer-motion animation */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="relative flex flex-col items-center px-10 py-12 "
+      >
         {/* Book icon container */}
         <div className="relative w-[180px] h-[140px] mb-8 flex items-center justify-center">
           {/* Book icon */}
@@ -70,7 +76,7 @@ const Loader: React.FC = () => {
             />
           ))}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

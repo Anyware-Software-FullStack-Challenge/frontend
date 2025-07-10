@@ -16,7 +16,7 @@ const NavBar = () => {
           className="flex items-center gap-3 font-extrabold text-2xl tracking-wider text-zinc-100 drop-shadow-sm"
         >
           <img
-            src="/vecteezy_education-school-logo-element-vector_29100343.svg"
+            src="/Logo.svg"
             alt="Logo"
             className="h-10 w-10 object-contain"
           />
@@ -77,7 +77,7 @@ const NavBar = () => {
               <div className="flex items-center justify-between mb-6">
                 <span className="flex items-center gap-2 font-extrabold text-xl text-zinc-100">
                   <img
-                    src="/vecteezy_education-school-logo-element-vector_29100343.svg"
+                    src="/Logo.svg"
                     alt="Logo"
                     className="h-8 w-8 object-contain"
                   />

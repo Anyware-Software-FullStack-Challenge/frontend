@@ -54,7 +54,7 @@ const Footer = () => {
           <div className="flex-1 min-w-[220px]">
             <div className="flex items-center gap-3 mb-2">
               <img
-                src="/vecteezy_education-school-logo-element-vector_29100343.svg"
+                src="/Logo.svg"
                 alt="Logo"
                 className="h-10 w-10 object-contain"
               />

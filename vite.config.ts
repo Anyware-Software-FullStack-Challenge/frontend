@@ -7,8 +7,7 @@ export default defineVitestConfig({
   plugins: [react(), tailwindcss()],
   test: {
     environment: "jsdom",
-    setupFiles: ["@testing-library/jest-dom/extend-expect"],
+    setupFiles: ["./src/setupTests.ts"],
     globals: true,
-    // You can add more options here if needed
   },
 });

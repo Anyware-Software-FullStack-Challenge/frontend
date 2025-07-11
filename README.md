@@ -12,13 +12,13 @@ This is a complete full-stack application showcasing advanced React/TypeScript d
 
 - **React 19** with TypeScript for type-safe development
 - **Vite** for lightning-fast development and optimized builds
-- **Redux Toolkit** for state management with RTK Query patterns
+- **Redux Toolkit** for state management with async thunks
 - **React Router v7** with protected routes and layout system
 - **Material-UI (MUI) v7** for professional UI components
 - **MUI X Charts** for interactive data visualization
 - **Tailwind CSS v4** for utility-first styling
 - **Framer Motion** for smooth animations and transitions
-- **React i18next** for internationalization support
+- **Axios** for HTTP client with interceptors
 - **Vitest + Testing Library** for comprehensive testing
 
 ### Backend
@@ -34,9 +34,8 @@ This is a complete full-stack application showcasing advanced React/TypeScript d
 ### Development Tools
 
 - **ESLint** with TypeScript and React rules
-- **Prettier** for consistent code formatting
 - **Git** for version control
-- **Comprehensive testing suite** with unit and integration tests
+- **Comprehensive testing suite** with unit tests
 
 ## 🏗️ Architecture Highlights
 
@@ -44,63 +43,65 @@ This is a complete full-stack application showcasing advanced React/TypeScript d
 
 ```
 src/
-├── components/          # Reusable UI components
-├── features/           # Feature-based organization (Redux Toolkit)
-│   ├── auth/          # Authentication logic
-│   ├── announcements/ # Announcements feature
-│   └── quizzes/       # Quizzes feature
-├── hooks/             # Custom React hooks
-├── layout/            # Layout components (MainLayout, DashboardLayout)
-├── pages/             # Page components
-├── routes/            # Route definitions
-├── store/             # Redux store configuration
-└── utils/             # Utility functions
+├── api/               # Axios instance and HTTP configuration
+├── components/        # Reusable UI components (NavBar, Sidebar)
+├── features/          # Feature-based organization (Redux Toolkit)
+│   ├── auth/         # Authentication logic with Redux Toolkit
+│   ├── announcements/ # Announcements API and types
+│   └── quizzes/      # Quizzes API and types
+├── hoc/              # Higher-order components (RequireAuth)
+├── layout/           # Layout components (MainLayout, DashboardLayout)
+├── pages/            # Page components (Dashboard, Login, etc.)
+├── routes/           # Route definitions (AppRoutes)
+├── store/            # Redux store configuration
 ```
 
 ### Backend Architecture
 
 ```
 src/
-├── controllers/       # Business logic handlers
-├── middlewares/       # Express middlewares
-├── models/           # MongoDB schemas
-├── routes/           # API route definitions
-├── utils/            # Utility functions
-└── validators/       # Request validation schemas
+├── controllers/      # Business logic handlers (CRUD operations)
+├── middlewares/      # Express middlewares (error handling)
+├── models/          # MongoDB schemas (Announcement, Quiz)
+├── routes/          # API route definitions
+├── utils/           # Utility functions (database seeding)
+└── validators/      # Request validation schemas
 ```
 
 ## ✨ Key Features Implemented
 
 ### 🔐 Authentication & Authorization
 
-- JWT-based authentication system
+- JWT-based authentication system with environment-based credentials
 - Protected routes with RequireAuth HOC
-- Secure token storage and management
-- Automatic logout on token expiration
+- Secure token storage in localStorage
+- Automatic token injection in API requests via Axios interceptors
 
 ### 📊 Interactive Dashboard
 
 - Real-time data visualization with MUI X Charts
 - Bar charts for quiz distribution by course
-- Pie charts for announcement categorization
-- Responsive stat cards with live data
+- Pie charts for announcement categorization by role
+- Responsive stat cards with live data from backend
 
 ### 📢 Content Management
 
-- **Announcements System**: Create, read, update, delete announcements
-- **Quiz Management**: Comprehensive quiz creation and management
-- **Role-based Content**: Content categorization by educational roles
+- **Announcements System**: Read-only display of announcements with role-based categorization
+- **Quiz Management**: Read-only display of quizzes with course and topic filtering
+- **Role-based Content**: Content categorization (math, physics, management, events, other)
 
 ### 🎨 Modern UI/UX
 
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
-- **Smooth Animations**: Framer Motion for delightful interactions
+- **Smooth Animations**: Framer Motion for delightful page transitions
 - **Professional Styling**: Material-UI components with custom theming
+- **Loading States**: Proper loading indicators and error handling
 
 ### 🧪 Comprehensive Testing
 
-- **Unit Tests**: Redux slices, API services, and utility functions
-- **Integration Tests**: API endpoints and data flow
+- **Unit Tests**: Redux slices with async thunks and state management
+- **API Tests**: Service layer testing with mocked HTTP requests
+- **Test Coverage**: Vitest configuration with jsdom environment
 
 ## 🚀 Getting Started
 
@@ -113,13 +114,14 @@ src/
 ### Backend Setup
 
 ```bash
+cd backend
 npm install
 # Create .env file with:
 # MONGO_URI=your_mongodb_connection_string
 # JWT_SECRET=your_jwt_secret
-#PORT=5000
-#LOGIN_EMAIL=test@anyware.com
-#LOGIN_PASSWORD=123456
+# PORT=5000
+# LOGIN_EMAIL=test@anyware.com
+# LOGIN_PASSWORD=123456
 
 npm run dev
 ```
@@ -127,6 +129,7 @@ npm run dev
 ### Frontend Setup
 
 ```bash
+cd frontend/vite-project
 npm install
 npm run dev
 ```
@@ -136,30 +139,29 @@ npm run dev
 ```bash
 # Frontend tests
 npm test
-
-
 ```
 
 ## 📈 Performance Optimizations
 
 ### Frontend
 
-- **Code Splitting**: Route-based lazy loading
+- **Code Splitting**: Route-based organization
 - **Bundle Optimization**: Vite's efficient bundling
-- **Image Optimization**: Optimized assets and lazy loading
-- **State Management**: Efficient Redux patterns with RTK
+- **State Management**: Efficient Redux patterns with async thunks
+- **HTTP Optimization**: Axios interceptors for token management
 
 ### Backend
 
 - **Error Handling**: Comprehensive error middleware
 - **Validation**: Runtime type checking with Zod
 - **CORS Configuration**: Secure cross-origin requests
+- **Database Seeding**: Automated data population
 
 ## 🔒 Security Features
 
-- **JWT Authentication**: Secure token-based auth
-- **Protected Routes**: Client and server-side route protection
-- **Input Validation**: Zod schemas for all API endpoints
+- **JWT Authentication**: Secure token-based auth with 2-hour expiration
+- **Protected Routes**: Client-side route protection with RequireAuth HOC
+- **Input Validation**: Environment-based credential validation
 - **CORS Configuration**: Proper cross-origin request handling
 - **Error Sanitization**: Safe error responses
 
@@ -173,8 +175,6 @@ npm test
 ## 🌐 Internationalization
 
 - **i18next Integration**: Ready for multiple languages
-
-## 🚀 Deployment Ready
 
 ## 🎯 Why This Project Stands Out
 
@@ -196,9 +196,9 @@ This project demonstrates my expertise in:
 
 - **Full-Stack Development**: React, Node.js, MongoDB
 - **Modern JavaScript/TypeScript**: ES6+, TypeScript
-- **State Management**: Redux Toolkit, RTK Query
+- **State Management**: Redux Toolkit with async thunks
 - **UI/UX Design**: Material-UI, Tailwind CSS, Framer Motion
-- **Testing**: Unit Testing
+- **Testing**: Unit Testing with Vitest
 - **Security**: Authentication, authorization, and data protection
 
 Ready to bring this level of technical excellence to your team! 🚀

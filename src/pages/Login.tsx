@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { loginUser } from "../features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 const Login: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { loading, error } = useAppSelector((state) => state.auth);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const result = await dispatch(loginUser({ email, password }));
+
+    if (loginUser.fulfilled.match(result)) {
+      navigate("/dashboard");
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4">
       <motion.div
@@ -10,7 +30,7 @@ const Login: React.FC = () => {
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="w-full max-w-4xl bg-white rounded-2xl shadow-xl flex flex-col md:flex-row overflow-hidden border border-zinc-100"
       >
-        {/* Illustration Section (left, hidden on small screens) */}
+        {/* Illustration */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
@@ -24,7 +44,8 @@ const Login: React.FC = () => {
             loading="lazy"
           />
         </motion.div>
-        {/* Form Section (right) */}
+
+        {/* Form */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
@@ -34,7 +55,8 @@ const Login: React.FC = () => {
           <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 mb-8 text-center md:text-left">
             Login to Anywhere
           </h2>
-          <form className="flex flex-col gap-6">
+
+          <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="email"
@@ -46,6 +68,8 @@ const Login: React.FC = () => {
                 type="email"
                 id="email"
                 name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-2 rounded-md border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-black transition bg-zinc-50"
                 placeholder="you@email.com"
                 autoComplete="email"
@@ -63,17 +87,27 @@ const Login: React.FC = () => {
                 type="password"
                 id="password"
                 name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 rounded-md border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-black transition bg-zinc-50"
                 placeholder="Your password"
                 autoComplete="current-password"
                 required
               />
             </div>
+
+            {error && <p className="text-red-600 text-sm mt-[-8px]">{error}</p>}
+
             <button
               type="submit"
-              className="w-full py-3 rounded-md bg-black text-white font-semibold text-lg shadow hover:bg-zinc-800 transition-colors duration-200 cursor-pointer mt-2"
+              className="w-full py-3 rounded-md bg-black text-white font-semibold text-lg shadow hover:bg-zinc-800 transition-colors duration-200 cursor-pointer mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
+              disabled={loading}
             >
-              Login
+              {loading ? (
+                <CircularProgress size={22} color="inherit" />
+              ) : (
+                "Login"
+              )}
             </button>
           </form>
         </motion.div>

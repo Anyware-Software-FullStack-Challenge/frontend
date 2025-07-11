@@ -200,10 +200,6 @@ const Dashboard: React.FC = () => {
                     admin@anywhere.com
                   </span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <PersonIcon className="text-zinc-400" fontSize="small" />
-                  <span className="text-sm text-zinc-600">Administrator</span>
-                </div>
               </div>
             </motion.div>
 

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import Loader from "../components/loader";
+import Loader from "../components/loader/Loader";
 
 const MainLayout = () => {
   const [loading, setLoading] = useState(true);

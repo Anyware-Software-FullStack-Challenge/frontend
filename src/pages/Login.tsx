@@ -102,7 +102,11 @@ const Login: React.FC = () => {
               />
             </div>
 
-            {error && <p className="text-red-600 text-sm mt-[-8px]">{error}</p>}
+            {error && (
+              <p className="text-red-600 text-sm mt-[-8px]">
+                email or password is incorrect
+              </p>
+            )}
 
             <button
               type="submit"

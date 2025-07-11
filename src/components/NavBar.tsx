@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useAppSelector } from "../store/hooks";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NavBar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
+
   const navLinks = [{ title: "Home", path: "/" }];
 
   return (
@@ -32,12 +35,14 @@ const NavBar = () => {
               {item.title}
             </Link>
           ))}
-          <Link
-            to="/login"
-            className="ml-4 px-5 py-2 rounded-lg border border-zinc-700 bg-zinc-800 text-zinc-100 font-semibold shadow hover:bg-zinc-700 transition-colors duration-200 hover:scale-105"
-          >
-            Login
-          </Link>
+          {isAuthenticated ? null : (
+            <Link
+              to="/login"
+              className="ml-4 px-5 py-2 rounded-lg border border-zinc-700 bg-zinc-800 text-zinc-100 font-semibold shadow hover:bg-zinc-700 transition-colors duration-200 hover:scale-105"
+            >
+              Login
+            </Link>
+          )}
         </div>
         {/* Mobile menu button */}
         <button
@@ -101,13 +106,15 @@ const NavBar = () => {
                     {item.title}
                   </Link>
                 ))}
-                <Link
-                  to="/login"
-                  className="mt-4 px-5 py-2 rounded-lg border border-zinc-700 bg-zinc-800 text-zinc-100 font-semibold shadow hover:bg-zinc-700 transition-colors duration-200 hover:scale-105"
-                  onClick={() => setDrawerOpen(false)}
-                >
-                  Login
-                </Link>
+                {isAuthenticated ? null : (
+                  <Link
+                    to="/login"
+                    className="mt-4 px-5 py-2 rounded-lg border border-zinc-700 bg-zinc-800 text-zinc-100 font-semibold shadow hover:bg-zinc-700 transition-colors duration-200 hover:scale-105"
+                    onClick={() => setDrawerOpen(false)}
+                  >
+                    Login
+                  </Link>
+                )}
               </nav>
             </motion.div>
           </motion.div>

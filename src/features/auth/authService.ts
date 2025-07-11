@@ -1,5 +1,13 @@
 import axiosInstance from "../../api/axiosInstance";
 
+interface LoginResponse {
+  token: string;
+}
+
+interface LoginError {
+  message: string;
+}
+
 const login = async ({
   email,
   password,
@@ -7,12 +15,19 @@ const login = async ({
   email: string;
   password: string;
 }): Promise<string> => {
-  const response = await axiosInstance.post("/auth/login", {
-    email,
-    password,
-  });
+  try {
+    const response = await axiosInstance.post<LoginResponse>("/auth/login", {
+      email,
+      password,
+    });
 
-  return response.data.token;
+    return response.data.token;
+  } catch (error: any) {
+    if (error.response?.data?.message) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error("Login failed. Please try again.");
+  }
 };
 
 const authService = {

@@ -2,23 +2,27 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { loginUser } from "../features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { loading, error } = useAppSelector((state) => state.auth);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // Get the intended destination from location state, or default to dashboard
+  const from = (location.state as any)?.from?.pathname || "/dashboard";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = await dispatch(loginUser({ email, password }));
 
     if (loginUser.fulfilled.match(result)) {
-      navigate("/dashboard");
+      navigate(from, { replace: true });
     }
   };
 
@@ -74,6 +78,7 @@ const Login: React.FC = () => {
                 placeholder="you@email.com"
                 autoComplete="email"
                 required
+                disabled={loading}
               />
             </div>
             <div>
@@ -93,6 +98,7 @@ const Login: React.FC = () => {
                 placeholder="Your password"
                 autoComplete="current-password"
                 required
+                disabled={loading}
               />
             </div>
 

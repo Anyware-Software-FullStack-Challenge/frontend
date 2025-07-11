@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Announcement as AnnouncementIcon } from "@mui/icons-material";
 import { fetchAnnouncements } from "../features/announcements/api";
 import type { Announcement } from "../features/announcements/api";
+import SharedCard from "../components/SharedCard";
 
 const Announcements: React.FC = () => {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
@@ -46,31 +47,21 @@ const Announcements: React.FC = () => {
       {error && <div className="text-center text-red-500 py-8">{error}</div>}
 
       {!loading && !error && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {announcements.map((a) => (
-            <motion.div
+            <SharedCard
               key={a._id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white rounded-lg shadow-md p-6 border border-zinc-100"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <h3 className="text-lg font-semibold text-zinc-900">
-                  {a.title}
-                </h3>
-                <span
-                  className={`text-xs  px-2 py-1 rounded-full bg-blue-100 text-blue-700`}
-                >
-                  {a.role.charAt(0).toUpperCase() + a.role.slice(1)}
-                </span>
-              </div>
-              <p className="text-zinc-600 text-sm mb-4">{a.content}</p>
-              <div className="flex items-center justify-between text-xs text-zinc-500">
-                <span>By {a.author}</span>
-                <span>{new Date(a.createdAt).toLocaleDateString()}</span>
-              </div>
-            </motion.div>
+              type="announcement"
+              title={a.title}
+              content={a.content}
+              author={a.author}
+              role={a.role}
+              createdAt={a.createdAt}
+              onClick={() => {
+                // Handle announcement click if needed
+                console.log("Announcement clicked:", a.title);
+              }}
+            />
           ))}
         </div>
       )}

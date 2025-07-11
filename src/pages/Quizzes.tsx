@@ -7,6 +7,7 @@ import {
 } from "@mui/icons-material";
 import { fetchQuizzes } from "../features/quizzes/api";
 import type { Quiz } from "../features/quizzes/api";
+import SharedCard from "../components/SharedCard";
 
 const Quizzes: React.FC = () => {
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
@@ -49,44 +50,22 @@ const Quizzes: React.FC = () => {
       {error && <div className="text-center text-red-500 py-8">{error}</div>}
 
       {!loading && !error && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {quizzes.map((q) => (
-            <motion.div
+            <SharedCard
               key={q._id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white rounded-lg shadow-md border border-zinc-100 overflow-hidden"
-            >
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-zinc-900">
-                    {q.course} Quiz
-                  </h3>
-                  <span className="text-xs  bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                    {q.topic}
-                  </span>
-                </div>
-                <div className="flex items-center gap-4 text-xs text-zinc-500 mb-4">
-                  <div className="flex items-center gap-1">
-                    <TimerIcon fontSize="small" />
-                    <span>{q.options.length * 3} min</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <SchoolIcon fontSize="small" />
-                    <span>{q.options.length} options</span>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-zinc-500">
-                    Due: {new Date(q.dueDate).toLocaleDateString()}
-                  </span>
-                  <button className="px-4 py-2 bg-blue-600 cursor-pointer text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
-                    Start Quiz
-                  </button>
-                </div>
-              </div>
-            </motion.div>
+              type="quiz"
+              title={q.question}
+              course={q.course}
+              topic={q.topic}
+              dueDate={q.dueDate}
+              options={q.options}
+              onClick={() => {
+                // Handle quiz click if needed
+                console.log("Quiz clicked:", q.question);
+              }}
+              buttonText="Start Quiz"
+            />
           ))}
         </div>
       )}

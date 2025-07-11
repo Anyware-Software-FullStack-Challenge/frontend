@@ -4,3 +4,12 @@ html,
 body {
   @apply bg-gradient-to-br from-zinc-50 via-white to-zinc-100 min-h-screen;
 }
+
+@layer utilities {
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

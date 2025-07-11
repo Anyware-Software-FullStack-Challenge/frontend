@@ -21,6 +21,7 @@ const Quizzes: React.FC = () => {
       })
       .catch((err) => {
         setError("Failed to load quizzes.");
+        console.log(err);
         setLoading(false);
       });
   }, []);
@@ -62,7 +63,7 @@ const Quizzes: React.FC = () => {
                   <h3 className="text-lg font-semibold text-zinc-900">
                     {q.course} Quiz
                   </h3>
-                  <span className="text-xs text-zinc-500 bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                  <span className="text-xs  bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
                     {q.topic}
                   </span>
                 </div>

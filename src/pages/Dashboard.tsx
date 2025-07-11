@@ -164,7 +164,6 @@ const Dashboard: React.FC = () => {
                   },
                 ]}
                 height={300}
-                legend={{ hidden: false }}
               />
             </div>
           </div>

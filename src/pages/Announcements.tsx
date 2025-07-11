@@ -17,6 +17,8 @@ const Announcements: React.FC = () => {
       })
       .catch((err) => {
         setError("Failed to load announcements.");
+        console.log(err);
+
         setLoading(false);
       });
   }, []);
@@ -58,7 +60,7 @@ const Announcements: React.FC = () => {
                   {a.title}
                 </h3>
                 <span
-                  className={`text-xs text-zinc-500 px-2 py-1 rounded-full bg-blue-100 text-blue-700`}
+                  className={`text-xs  px-2 py-1 rounded-full bg-blue-100 text-blue-700`}
                 >
                   {a.role.charAt(0).toUpperCase() + a.role.slice(1)}
                 </span>

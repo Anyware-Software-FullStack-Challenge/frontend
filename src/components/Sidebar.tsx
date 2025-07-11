@@ -46,7 +46,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
   return (
     <>
-      {/* Mobile overlay */}
       {isOpen && (
         <motion.div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
@@ -57,13 +56,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         />
       )}
 
-      {/* Sidebar */}
       <motion.div
         className={`fixed top-0 left-0 h-full w-64 bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0 lg:relative lg:z-auto`}
       >
-        {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-zinc-200">
           <div className="flex items-center gap-3">
             <img
@@ -93,7 +90,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Navigation */}
         <nav className="p-4">
           <ul className="space-y-2">
             {menuItems.map((item, index) => (
@@ -123,7 +119,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           </ul>
         </nav>
 
-        {/* Footer with Logout */}
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-zinc-200">
           <div className="text-center text-sm text-zinc-500 mb-4">
             <p>Anywhere Platform</p>

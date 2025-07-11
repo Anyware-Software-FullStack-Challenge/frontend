@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const HeroSection: React.FC = () => {
   return (
     <section className="w-full flex flex-col-reverse md:flex-row items-center justify-between gap-8 h-screen mt-7 px-8 md:px-12 lg:px-28">
-      {/* Text Content */}
       <div className="flex-1 flex flex-col items-start justify-center text-center md:text-left">
         <h1 className="text-4xl md:text-5xl font-extrabold text-zinc-900 mb-4 leading-tight">
           Welcome to <span className="text-blue-700">Anywhere Platform</span>
@@ -20,7 +19,6 @@ const HeroSection: React.FC = () => {
           Get Started
         </Link>
       </div>
-      {/* Illustration */}
       <div className="flex-1 flex items-center justify-center mb-8 md:mb-0">
         <img
           src="/undraw_learning_qt7d.svg"

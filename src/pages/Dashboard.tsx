@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useAppSelector } from "../store/hooks";
 import {
-  Person as PersonIcon,
   Email as EmailIcon,
   Security as SecurityIcon,
   Announcement as AnnouncementIcon,
@@ -34,11 +33,9 @@ const Dashboard: React.FC = () => {
       });
   }, []);
 
-  // Recent activity: last 2 announcements and last quiz
   const recentAnnouncements = announcements.slice(-2).reverse();
   const recentQuizzes = quizzes.slice(-1).reverse();
 
-  // Only show these two stats
   const stats = [
     {
       title: "Total Announcements",
@@ -54,8 +51,6 @@ const Dashboard: React.FC = () => {
     },
   ];
 
-  // --- MUI X Charts Data ---
-  // Quizzes per course (bar chart)
   const quizzesByCourse: Record<string, number> = {};
   quizzes.forEach((q) => {
     quizzesByCourse[q.course] = (quizzesByCourse[q.course] || 0) + 1;
@@ -64,7 +59,6 @@ const Dashboard: React.FC = () => {
     ([course, count]) => ({ course, count })
   );
 
-  // Announcements per role (pie chart)
   const annByRole: Record<string, number> = {};
   announcements.forEach((a) => {
     annByRole[a.role] = (annByRole[a.role] || 0) + 1;
@@ -88,7 +82,6 @@ const Dashboard: React.FC = () => {
       {error && <div className="text-center text-red-500 py-8">{error}</div>}
       {!loading && !error && (
         <>
-          {/* Welcome Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -103,7 +96,6 @@ const Dashboard: React.FC = () => {
             </p>
           </motion.div>
 
-          {/* Stats Grid: Only two cards */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -128,9 +120,7 @@ const Dashboard: React.FC = () => {
             ))}
           </motion.div>
 
-          {/* Charts Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            {/* Quizzes Bar Chart */}
             <div className="bg-white rounded-lg shadow-md p-6 border border-zinc-100">
               <h3 className="text-lg font-semibold text-zinc-900 mb-4">
                 Quizzes by Course
@@ -149,7 +139,6 @@ const Dashboard: React.FC = () => {
                 height={300}
               />
             </div>
-            {/* Announcements Pie Chart */}
             <div className="bg-white rounded-lg shadow-md p-6 border border-zinc-100">
               <h3 className="text-lg font-semibold text-zinc-900 mb-4">
                 Announcements by Role
@@ -168,9 +157,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          {/* User Info and Status */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Authentication Status */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -203,7 +190,6 @@ const Dashboard: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Recent Activity */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

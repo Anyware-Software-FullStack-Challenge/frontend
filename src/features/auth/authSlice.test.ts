@@ -51,7 +51,6 @@ describe("authSlice", () => {
   });
 });
 
-// Thunk test for loginUser
 import { configureStore } from "@reduxjs/toolkit";
 describe("loginUser thunk", () => {
   beforeEach(() => {

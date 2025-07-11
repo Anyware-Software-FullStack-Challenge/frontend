@@ -10,13 +10,11 @@ import Quizzes from "../pages/Quizzes";
 
 const AppRoutes = () => (
   <Routes>
-    {/* Public routes with MainLayout */}
     <Route path="/" element={<MainLayout />}>
       <Route index element={<Home />} />
       <Route path="login" element={<Login />} />
     </Route>
 
-    {/* Protected routes with DashboardLayout */}
     <Route path="/dashboard" element={<DashboardLayout />}>
       <Route
         index

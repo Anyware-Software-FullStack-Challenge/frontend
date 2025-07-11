@@ -27,31 +27,25 @@ const randomParticles = () =>
 const Loader: React.FC = () => {
   return (
     <div className="fixed inset-0 w-screen h-screen flex flex-col items-center justify-center z-[3000] overflow-hidden ">
-      {/* Floating particles */}
       <div className="absolute w-full h-full pointer-events-none">
         {randomParticles()}
       </div>
 
-      {/* Main loading container with framer-motion animation */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="relative flex flex-col items-center px-10 py-12 "
       >
-        {/* Book icon container */}
         <div className="relative w-[180px] h-[140px] mb-8 flex items-center justify-center">
-          {/* Book icon */}
           <img
             src="/books.svg"
             alt="Loading books"
             className="w-full h-full drop-shadow-2xl animate-bounce"
             style={{ transformOrigin: "center" }}
           />
-          {/* Enhanced shadow */}
         </div>
 
-        {/* Loading text */}
         <h2 className="font-extrabold tracking-wider text-slate-800 text-[34px] mb-3 text-center">
           Welcome to Anywhere Platform
         </h2>
@@ -59,12 +53,10 @@ const Loader: React.FC = () => {
           Loading your experience...
         </p>
 
-        {/* Loading progress bar */}
         <div className="w-72 h-1.5 bg-blue-200/20 rounded mt-6 overflow-hidden relative">
           <div className="absolute top-0 left-0 h-full w-full bg-zinc-600 animate-pulse" />
         </div>
 
-        {/* Loading dots */}
         <div className="flex gap-2 mt-5">
           {[0, 1, 2].map((i) => (
             <div

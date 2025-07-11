@@ -14,7 +14,6 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Get the intended destination from location state, or default to dashboard
   const from = (location.state as any)?.from?.pathname || "/dashboard";
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -34,7 +33,6 @@ const Login: React.FC = () => {
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="w-full max-w-4xl bg-white rounded-2xl shadow-xl flex flex-col md:flex-row overflow-hidden border border-zinc-100"
       >
-        {/* Illustration */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
@@ -49,7 +47,6 @@ const Login: React.FC = () => {
           />
         </motion.div>
 
-        {/* Form */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}

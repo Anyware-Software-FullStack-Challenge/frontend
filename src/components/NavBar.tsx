@@ -44,7 +44,6 @@ const NavBar = () => {
             </Link>
           )}
         </div>
-        {/* Mobile menu button */}
         <button
           className="md:hidden text-zinc-100 focus:outline-none"
           onClick={() => setDrawerOpen(true)}
@@ -52,7 +51,6 @@ const NavBar = () => {
           <MenuIcon fontSize="large" />
         </button>
       </div>
-      {/* Mobile Drawer with framer-motion */}
       <AnimatePresence>
         {drawerOpen && (
           <motion.div
@@ -62,7 +60,6 @@ const NavBar = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            {/* Overlay */}
             <motion.div
               className="absolute inset-0 bg-black/40"
               initial={{ opacity: 0 }}
@@ -71,7 +68,6 @@ const NavBar = () => {
               transition={{ duration: 0.2 }}
               onClick={() => setDrawerOpen(false)}
             />
-            {/* Drawer */}
             <motion.div
               className="relative w-72 h-full bg-zinc-900 shadow-lg p-6 flex flex-col"
               initial={{ x: "100%" }}
